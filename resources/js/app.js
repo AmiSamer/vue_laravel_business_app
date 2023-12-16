@@ -26,9 +26,9 @@ import '../../public/frontend/plugins/datatables-buttons/js/dataTables.buttons.m
 import '../../public/frontend/plugins/datatables-buttons/js/buttons.bootstrap4.min.js'
 import '../../public/frontend/plugins/jszip/jszip.min.js'
 
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+// import pdfMake from "pdfmake/build/pdfmake";
+// import pdfFonts from "pdfmake/build/vfs_fonts";
+// pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import '../../public/frontend/plugins/datatables-buttons/js/buttons.html5.min.js'
 import '../../public/frontend/plugins/datatables-buttons/js/buttons.print.min.js'

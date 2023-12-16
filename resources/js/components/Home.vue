@@ -13,7 +13,7 @@
       
     <p class="login-box-msg">Please login to your account</p>
 
-    <form @submit.prevent="login">
+    <form @submit.prevent="loginFormSubmit">
       <label for="">Email :</label>
       <div class="input-group mb-3">
         <input type="email" class="form-control" v-model="form.email">
@@ -26,11 +26,17 @@
 
       <label for="">Password :</label>
       <div class="input-group mb-3">
-        <input type="password" class="form-control" v-model="form.password">
+        <!-- <input type="password" class="form-control" v-model="form.password">  -->
+        <input v-if="showCurrentPassword" type="text" class="form-control" v-model="form.password" >
+        <input v-else type="password" class="form-control" v-model="form.password" >
         <div class="input-group-append">
-          <div class="input-group-text">
+          <!-- <div class="input-group-text">
             <span class="fas fa-lock"></span>
-          </div>
+          </div> -->
+          <button class="btn btn-success btn-sm"  @click="toggleShowCurrentPassword"><span class="icon is-small is-right">
+            <i style="padding-top: 4px;" class="fas" :class="{ 'fa-eye-slash': showCurrentPassword, 'fa-eye': !showCurrentPassword }"></i>
+            </span>
+          </button> 
         </div>
       </div>
       <br>
@@ -38,7 +44,7 @@
         <!-- /.col -->
         
         <div class="col-12">
-          <button type="submit" class="btn btn-success btn-block">Login</button>
+          <button type="button" @click="userLogin" class="btn btn-success btn-block">Login</button>
         </div>
         <!-- /.col -->
       </div>
@@ -59,8 +65,15 @@ import store from '../store/index.js'
 import Swal from 'sweetalert2'
 
 export default {
+
+  computed : {
+    buttonLabelForCurrentPassword() {
+           return (this.showCurrentPassword) ? "Hide" : "Show";
+        }
+  },
  data() {
     return {
+      showCurrentPassword : false,
        form: {
           email: '',
           password: ''
@@ -68,8 +81,17 @@ export default {
     }
  },
  
-methods: {    
-    login(){
+methods: {
+  
+  toggleShowCurrentPassword() {
+      this.showCurrentPassword = !this.showCurrentPassword;
+    },
+
+    loginFormSubmit(e) {
+        e.preventDefault();
+      },
+
+    userLogin(){
 
       if(this.form.email == ''){
             Swal.fire({
